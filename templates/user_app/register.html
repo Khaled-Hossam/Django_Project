@@ -1,0 +1,19 @@
+{% extends "user_app/base.html" %}
+
+{% block body_block %}
+{% if registered %}
+{# redirect to profile#}
+<h1>Registered</h1>
+{% else %}
+{# Show registeration form #}
+<h1>You need to register</h1>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{user_form.as_p}}
+    <hr>
+    {{profile_form.as_p}}
+<input type="submit" value="login">
+</form>
+{% endif %}
+
+{% endblock %}
