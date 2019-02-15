@@ -6,3 +6,6 @@ media/
 
 # ignore project virtual enviroment 
 project-env/
+
+# ignore settings file
+django_project/settings.py
