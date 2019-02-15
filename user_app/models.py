@@ -13,7 +13,7 @@ def pics_directory_path(instance, filename):
 
 class UserProfileInfo(models.Model):
     user = models.OneToOneField(User)
-    profile_pic = models.ImageField(upload_to=pics_directory_path,blank=True)
+    profile_picture = models.ImageField(upload_to=pics_directory_path,blank=True)
     # TODO: add gender
 
     def __str__(self):

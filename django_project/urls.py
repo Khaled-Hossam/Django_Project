@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^$',views.index, name='index'),
     url(r'^admin/', admin.site.urls),
     url(r'^user_app/',include('user_app.urls')),
+    url(r'^logout/$',views.user_logout,name='logout')
 ]

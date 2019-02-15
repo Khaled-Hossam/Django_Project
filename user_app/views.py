@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from user_app.forms import UserForm, UserUpdateInfoForm
-
-# Create your views here.
+# login imports
+from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth import authenticate, login, logout
 
 def index(request):
     return render(request, "user_app/index.html")
@@ -41,5 +44,31 @@ def register(request):
         'registered':registerd
     })
 
-def login(request):
-    pass
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password =  request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+        if user:
+            if user.is_active:
+                login(request,user)
+                return HttpResponseRedirect(reverse('index'))
+
+            else:
+                return HttpResponse("Account not active")
+
+        else:
+            return HttpResponse("Invalid username or password")
+
+    else:
+        return render(request,'user_app/login.html')
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('index'))
+
+@login_required
+def special(request):
+    return HttpResponse("Logged in!")

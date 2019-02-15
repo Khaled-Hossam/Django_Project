@@ -1,4 +1,5 @@
 {% extends "user_app/base.html" %}
+{% load crispy_forms_tags %}
 
 {% block body_block %}
 {% if registered %}
@@ -9,10 +10,11 @@
 <h1>You need to register</h1>
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{user_form.as_p}}
+    {#user_form.as_p#}
+    {{ user_form|crispy }}
     <hr>
-    {{profile_form.as_p}}
-<input type="submit" value="login">
+    {{profile_form|crispy}}
+<input type="submit" class="btn btn-success" value="login">
 </form>
 {% endif %}
 
