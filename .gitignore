@@ -1,0 +1,8 @@
+# ignore VSCode setings
+.vscode/
+
+# ignore media
+media/
+
+# ignore project virtual enviroment 
+project-env/
