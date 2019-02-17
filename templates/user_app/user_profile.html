@@ -1,0 +1,72 @@
+{% extends 'user_app/base.html'%}
+
+{% block body_block %}
+<br>
+{% if user.is_authenticated %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 ">
+      <div class="list-group ">
+        <img src="{{user_info.profile_picture.url}}" alt="">
+        <a href="#" class="list-group-item list-group-item-action">User Experience</a>
+        <a href="#" class="list-group-item list-group-item-action">User Car Rental Requests</a>
+        <a href="#" class="list-group-item list-group-item-action">User Hotel Reservations</a>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <h4> Profile</h4>
+              <hr>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <form>
+                <div class="form-group row">
+                  <label for="username" class="col-4 col-form-label">Username</label>
+                  <div class="col-8">
+                    <input id="username" name="username" class="form-control here" value="{{ user.username }}" type="text"
+                      disabled>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="name" class="col-4 col-form-label">First Name</label>
+                  <div class="col-8">
+                    <input id="name" name="name" class="form-control here" type="text" value="{{ user.first_name }}"
+                      disabled>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="lastname" class="col-4 col-form-label">Last Name</label>
+                  <div class="col-8">
+                    <input id="lastname" name="lastname" class="form-control here" type="text" value="{{ user.last_name }}"
+                      disabled>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="email" class="col-4 col-form-label">Email</label>
+                  <div class="col-8">
+                    <input id="email" name="email" class="form-control here" type="email" value="{{ user.email }}"
+                      disabled>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="offset-4 col-8">
+                    <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Update your
+                      profile</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

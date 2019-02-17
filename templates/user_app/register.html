@@ -2,20 +2,21 @@
 {% load crispy_forms_tags %}
 
 {% block body_block %}
+<br>
 {% if registered %}
-{# redirect to profile#}
-<h1>Registered</h1>
+{# redirect to login#}
+<h1>Welcome Aboard!</h1>
 {% else %}
 {# Show registeration form #}
-<h1>You need to register</h1>
+<h1>Join us !</h1>
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {#user_form.as_p#}
     {{ user_form|crispy }}
     <hr>
     {{profile_form|crispy}}
-<input type="submit" class="btn btn-success" value="login">
+<input type="submit" class="btn btn-success btn-lg" value="Register">
 </form>
+
 {% endif %}
 
 {% endblock %}
