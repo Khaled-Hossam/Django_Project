@@ -16,10 +16,12 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from user_app import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^$',views.index, name='index'),
     url(r'^admin/', admin.site.urls),
     url(r'^user_app/',include('user_app.urls')),
     url(r'^logout/$',views.user_logout,name='logout')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
