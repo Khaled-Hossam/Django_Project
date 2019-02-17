@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from user_app.forms import UserForm, UserUpdateInfoForm
+from user_app.models import UserProfileInfo
+
 # login imports
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
@@ -10,6 +12,9 @@ def index(request):
     return render(request, "user_app/index.html")
 
 def register(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('index'))
+
     registerd = False
     if request.method == "POST":
 
@@ -31,8 +36,8 @@ def register(request):
             profile.save()
 
             registerd = True
-        else:
-            print(user_form.errors,profile_form.errors)
+        # else:
+            # raise user_form.errors
     
     else:
         user_form = UserForm()
@@ -45,8 +50,11 @@ def register(request):
     })
 
 def user_login(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('index'))
+        
     if request.method == 'POST':
-        username = request.POST.get('username')
+        username = request.POST.get('username').lower()
         password =  request.POST.get('password')
 
         user = authenticate(username=username, password=password)
@@ -56,10 +64,10 @@ def user_login(request):
                 return HttpResponseRedirect(reverse('index'))
 
             else:
-                return HttpResponse("Account not active")
+                return render(request,'user_app/login.html',context={"inactive":True,})
 
         else:
-            return HttpResponse("Invalid username or password")
+            return render(request,'user_app/login.html',context={"invalid":True,"username":username,})
 
     else:
         return render(request,'user_app/login.html')
@@ -69,6 +77,11 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
 
+# @login_required
+# def special(request):
+#     return HttpResponse("Logged in!")
+
 @login_required
-def special(request):
-    return HttpResponse("Logged in!")
+def user_profile(request):
+    user_info = UserProfileInfo.objects.get(user=request.user)
+    return render(request,'user_app/user_profile.html',{"user":request.user,"user_info":user_info})
