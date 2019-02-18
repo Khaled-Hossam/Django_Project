@@ -1,0 +1,46 @@
+{% extends 'user_app/base.html'%}
+<br>
+{% block body_block %}
+{% if invalid %}
+<div class="alert alert-danger" role="alert">
+        Invalid username or password.
+      </div>
+<div class="text-center" >
+        <form method="POST" action="{% url 'user_app:user_login' %}" class="form-signin" >
+                {% csrf_token %}
+             <div class="form-group">
+            <label for="username"> Username</label>
+            <input type="text"  class="form-control" name="username" placeholder="Username" value="{{username}}" placeholder="Username" required autofocus>
+        </div>
+        <div class="form-group">
+            <label for="password"> Password</label>
+            <input type="password" class="form-control" name="password" placeholder="Password" required>
+        </div>
+        
+            <input type="submit" class="btn btn-primary btn-block" value="login">
+        
+        </form>
+        </div>
+{% elif inactive %}
+<div class="alert alert-danger" role="alert">
+        Your account is inactive please contact the site's admin.
+      </div>
+{% else %}
+<div class="text-center" >
+<form method="POST" action="{% url 'user_app:user_login' %}" class="form-signin" >
+        {% csrf_token %}
+     <div class="form-group">
+    <label for="username"> Username</label>
+    <input type="text"  class="form-control" name="username" placeholder="Username"  placeholder="Username" required autofocus>
+</div>
+<div class="form-group">
+    <label for="password"> Password</label>
+    <input type="password" class="form-control" name="password" placeholder="Password" required>
+</div>
+
+    <input type="submit" class="btn btn-primary btn-block" value="login">
+
+</form>
+</div>
+{% endif %}
+{% endblock %}

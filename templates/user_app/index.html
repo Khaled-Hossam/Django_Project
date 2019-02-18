@@ -1,0 +1,21 @@
+{% extends "user_app/base.html" %}
+
+{% block body_block %}
+<br>
+{% if user.is_authenticated  %}
+<div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">Welcome!</h1>
+          <p class="lead">Hello, {{user.username}} !</p>
+        </div>
+      </div>
+{% else %}
+<div class="alert alert-dark" role="alert">
+        <h4 class="alert-heading">Why don't you start looking for an adventure?</h4>
+        <p>Join us !</p>
+        <hr>
+        <a href="{% url 'user_app:register' %}" class="mb-0">Register or login</a>
+</div>
+{% endif %}
+
+{% endblock %}
