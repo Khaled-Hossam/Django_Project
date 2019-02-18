@@ -15,12 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-# we need to import the views of this app just to display the home page
 from countries import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^countries/', include('countries.urls')),
-    url(r'^', views.index),
-    
+    url(r'^index', views.index),
+    url(r'^(?P<country_id>[0-9]+)$', views.display),
 ]

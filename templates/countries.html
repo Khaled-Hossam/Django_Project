@@ -1,0 +1,7 @@
+<form method="GET">
+    <select >
+    {% for country in countries %}
+    <option value="{{ country.id }}"> {{ country }}</option>
+    {% endfor %}
+    </select>
+</form>
