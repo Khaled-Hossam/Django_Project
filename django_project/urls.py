@@ -15,25 +15,20 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-<<<<<<< HEAD
 # we need to import the views of this app just to display the home page
 from countries import views
-=======
-from user_app import views
+# from user_app import views
 from django.conf import settings
 from django.conf.urls.static import static
->>>>>>> 253e7c586cc3083ff146be59720f5de3df211fa9
 
 urlpatterns = [
-    url(r'^$',views.index, name='index'),
+    # url(r'^$',views.index, name='index'),
     url(r'^admin/', admin.site.urls),
-<<<<<<< HEAD
     url(r'^countries/', include('countries.urls')),
     url(r'^', views.index),
     
-]
-=======
+
     url(r'^user_app/',include('user_app.urls')),
-    url(r'^logout/$',views.user_logout,name='logout')
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
->>>>>>> 253e7c586cc3083ff146be59720f5de3df211fa9
+    # url(r'^logout/$',views.user_logout,name='logout')
+] 
+# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

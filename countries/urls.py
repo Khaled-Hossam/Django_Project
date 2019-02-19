@@ -20,4 +20,6 @@ from countries import views
 urlpatterns = [
     url(r'^index', views.index),
     url(r'^(?P<country_id>[0-9]+)$', views.display),
+
+    url(r'^cities/(?P<city_id>[0-9]+)$', views.display_city),
 ]
