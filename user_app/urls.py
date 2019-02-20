@@ -16,10 +16,13 @@ Including another URLconf
 from django.conf.urls import url
 from user_app import views
 
+
 app_name='user_app'
 
 urlpatterns = [
     url(r'^register/$',views.register,name="register"),
     url(r'^login/$',views.user_login,name="user_login"),
     url(r'^profile/$',views.user_profile,name="user_profile"),
+    url(r'^$',views.index, name='index'),
+
 ]

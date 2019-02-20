@@ -25,10 +25,12 @@ urlpatterns = [
     # url(r'^$',views.index, name='index'),
     url(r'^admin/', admin.site.urls),
     url(r'^countries/', include('countries.urls')),
-    url(r'^', views.index),
+    # url(r'^', views.index),
     
 
     url(r'^user_app/',include('user_app.urls')),
-    # url(r'^logout/$',views.user_logout,name='logout')
+    # url(r'^logout/$',views.user_logout,name='logout')\
+    url(r'^book_hotel/',include('hotel.urls')), ### user came to book a room in a hotel
+    url(r'^book_car/', include('car.urls')), ### user came to book a car 
 ] 
 # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
