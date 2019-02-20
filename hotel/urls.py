@@ -1,4 +1,4 @@
-"""django_project URL Configuration
+"""TOURISM URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
@@ -13,16 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
-from user_app import views
-
-
-app_name='user_app'
-
+from django.conf.urls import url, include
+from . import views
 urlpatterns = [
-    url(r'^register/$',views.register,name="register"),
-    url(r'^login/$',views.user_login,name="user_login"),
-    url(r'^profile/$',views.user_profile,name="user_profile"),
-    url(r'^$',views.index, name='index'),
+        url(r'book', views.reservation), ### user came to book a room in a hotel
 
 ]
