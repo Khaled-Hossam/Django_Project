@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from cities_light.models import Country, City
+from .models import Country, City
 
 def index(request):
     countries = Country.objects.all()

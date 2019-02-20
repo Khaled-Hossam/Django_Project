@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<br><br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <div class="form">
+                <form method="POST">
+                    <div class="form-group">
+
+                        {% csrf_token %}
+                        <!-- {{ form.as_p }} -->
+                        <label> Article Title : </label>
+                        {{ form.title}}
+                        <br>
+                        <br>
+                        <label> Article content : </label>
+                        {{ form.post_content}}
+
+                        <div class="text-center mt-3">
+                            <input type="submit" id='js-pl-submit' class="btn btn-danger comment-submit-button"
+                                value='Submit' />
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
