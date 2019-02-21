@@ -30,5 +30,4 @@ urlpatterns = [
 
     url(r'^user_app/',include('user_app.urls')),
     # url(r'^logout/$',views.user_logout,name='logout')
-] 
-# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

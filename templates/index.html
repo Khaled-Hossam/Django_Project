@@ -26,9 +26,9 @@
 											{% for country in top6_countries %}
 											<div class="carousel-item {% if forloop.first %} active {% endif %}">
 												<a href="/countries/{{ country.id }}" >
-													<img class="d-block w-100" height="400px" src="/static/img/about-img.jpg" alt="First slide">
+													<img class="d-block w-100" height="400px" src="/static/media/{{country.image}}" alt="First slide">
 													<div class="carousel-caption d-none d-md-block">
-															<h1>{{country}}</h1>
+															<h1 style="color:whitesmoke">{{country}}</h1>
 													</div>
 												</a>
 											</div>
@@ -68,7 +68,7 @@
 							<div class="single-destination relative">
 								<div class="thumb relative">
 									<div class="overlay overlay-bg"></div>
-									<img class="img-fluid" src="/static/img/d2.jpg" alt="">
+									<img class="img-fluid" src="/static/media/{{city.image}}" alt="">
 								</div>
 								<div class="desc">	
 									<a href="/countries/cities/{{city.id}}" class="price-btn">			
