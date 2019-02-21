@@ -39,11 +39,10 @@ def show_city_articles(request,city_id):
                         comments[j]['post__post_content']=""     
 
     
- #     posts_without_comments=Post.objects.values('id','title','post_content').exclude(id__in=Comment.objects.values('post__id'))
-#     posts_data={'article_data':comments,'posts_with_no_comments',posts_without_comments}
+    posts_without_comments=Post.objects.values('id','title','post_content').exclude(id__in=Comment.objects.values('post__id')).filter(city_id=city_id)
+    posts_data={'article_data':comments,'posts':posts_without_comments}
     
-
-    posts_data={'article_data':comments}
+#     posts_data={'article_data':comments}
     return render(request,"user_experience_app/city_page.html",posts_data)
 
 

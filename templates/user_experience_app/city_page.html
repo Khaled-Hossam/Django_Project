@@ -44,6 +44,18 @@
       {% endfor %}
       <br>
       <br>
+      
+      <!-- posts without comments -->
+      {% for artcle in posts %}
+      <h3> {{artcle.title}}</h3>
+      <h5 style="color: #5a5050;">{{artcle.post_content}}</h5>
+      <a style="margin-top: 15px;margin-bottom: 20px;" href="{{artcle.id}}/1/">Comment</a>
+      <br>
+      <br>
+      
+      
+      {% endfor %}
+
 
       <!-- Button trigger modal -->
       <a style="float: right" href="add_post/1/" type="button" class="btn btn-success"> Add Article</a>
