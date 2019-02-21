@@ -17,11 +17,11 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from countries import views
 
-# app_name='countries'
+app_name='countries'
 
 urlpatterns = [
-    # url(r'^index', views.index,name='index'),
-    url(r'^index', views.index),
+    url(r'^index', views.index,name='index'),
+    # url(r'^index', views.index),
     url(r'^(?P<country_id>[0-9]+)$', views.display),
 
     url(r'^cities/(?P<city_id>[0-9]+)$', views.display_city),
