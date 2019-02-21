@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^city/(?P<city_id>[0-9]+)/$',views.show_city_articles),
     url(r'^city/(?P<city_id>[0-9]+)/(?P<post_id>[0-9]+)/(?P<user_id>[0-9]+)/$',views.add_comment),
     url(r'^city/(?P<city_id>[0-9]+)/add_post/(?P<user_id>[0-9]+)/$',views.add_post),
+    # url(r'^admin/$',views.add_post),
 
 ]
