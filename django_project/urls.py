@@ -32,6 +32,5 @@ urlpatterns = [
    
     url(r'^book_hotel/',include('hotel.urls')), ### user came to book a room in a hotel
     url(r'^book_car/', include('car.urls')), ### user came to book a car 
-] 
-# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
  
