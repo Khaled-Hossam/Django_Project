@@ -1,46 +1,68 @@
-{% extends 'user_app/base.html'%}
-<br>
-{% block body_block %}
-{% if invalid %}
-<div class="alert alert-danger" role="alert">
-        Invalid username or password.
-      </div>
-<div class="text-center" >
-        <form method="POST" action="{% url 'user_app:user_login' %}" class="form-signin" >
-                {% csrf_token %}
-             <div class="form-group">
-            <label for="username"> Username</label>
-            <input type="text"  class="form-control" name="username" placeholder="Username" value="{{username}}" placeholder="Username" required autofocus>
-        </div>
-        <div class="form-group">
-            <label for="password"> Password</label>
-            <input type="password" class="form-control" name="password" placeholder="Password" required>
-        </div>
-        
-            <input type="submit" class="btn btn-primary btn-block" value="login">
-        
-        </form>
-        </div>
-{% elif inactive %}
-<div class="alert alert-danger" role="alert">
-        Your account is inactive please contact the site's admin.
-      </div>
-{% else %}
-<div class="text-center" >
-<form method="POST" action="{% url 'user_app:user_login' %}" class="form-signin" >
-        {% csrf_token %}
-     <div class="form-group">
-    <label for="username"> Username</label>
-    <input type="text"  class="form-control" name="username" placeholder="Username"  placeholder="Username" required autofocus>
-</div>
-<div class="form-group">
-    <label for="password"> Password</label>
-    <input type="password" class="form-control" name="password" placeholder="Password" required>
-</div>
+{% extends 'base.html'%}
+{% load static %}
 
-    <input type="submit" class="btn btn-primary btn-block" value="login">
+{% block body %}
+<section class="about-banner relative">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    Login
+                </h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="about-info-area section-gap">
+    <div class="container">
+        <div class="row align-items-center">
+            {% if invalid %}
+            <div class="alert alert-danger" style="width: 100%;" role="alert">
+                Invalid username or password.
+            </div>
+            <div class=" mx-auto text-center">
+                <form method="POST" action="{% url 'user_app:user_login' %}" class="form-signin">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username"> Username</label>
+                        <input type="text" class="form-control" name="username" placeholder="Username" value="{{username}}"
+                            placeholder="Username" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="password"> Password</label>
+                        <input type="password" class="form-control" name="password" placeholder="Password" required>
+                    </div>
 
-</form>
-</div>
-{% endif %}
+                    <input type="submit" class="primary-btn text-uppercase btn-block" value="login">
+
+                </form>
+            </div>
+            {% elif inactive %}
+            <div class="alert alert-danger" style="width: 100%;" role="alert">
+                Your account is inactive please contact the site's admin.
+            </div>
+            {% else %}
+            <div class="text-center mx-auto">
+                <form method="POST" action="{% url 'user_app:user_login' %}" class="form-signin">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username"> Username</label>
+                        <input type="text" class="form-control" name="username" placeholder="Username" placeholder="Username"
+                            required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="password"> Password</label>
+                        <input type="password" class="form-control" name="password" placeholder="Password" required>
+                    </div>
+
+                    <input type="submit" class="primary-btn text-uppercase btn-block" value="login">
+
+                </form>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</section>
 {% endblock %}

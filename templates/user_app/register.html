@@ -1,22 +1,31 @@
-{% extends "user_app/base.html" %}
+{% extends "base.html" %}
 {% load crispy_forms_tags %}
+{# crispy user_form user_form.helper #}
 
-{% block body_block %}
-<br>
-{% if registered %}
-{# redirect to login#}
-<h1>Welcome Aboard!</h1>
-{% else %}
-{# Show registeration form #}
-<h1>Join us !</h1>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ user_form|crispy }}
-    <hr>
-    {{profile_form|crispy}}
-<input type="submit" class="btn btn-success btn-lg" value="Register">
-</form>
-
-{% endif %}
-
+{% block body %}
+<section class="about-banner relative">
+        <div class="overlay overlay-bg"></div>
+        <div class="container">
+            <div class="row d-flex align-items-center justify-content-center">
+                <div class="about-content col-lg-12">
+                    <h1 class="text-white">
+                        Register 
+                    </h1>
+                </div>
+            </div>
+        </div>
+</section>
+<section class="about-info-area section-gap">
+        <div class="container">
+            <!-- <div class="row align-items-center "> -->
+                    <form method="POST" style="widows: 100%;" enctype="multipart/form-data" class="form-horizontal">
+                        {% csrf_token %}
+                        {{user_form|crispy}}
+                        <hr>
+                        {{profile_form|crispy}}
+                    <input type="submit" class="primary-btn text-uppercase btn-block" value="Register">
+                    </form>
+            <!-- </div> -->
+        </div>
+    </section>
 {% endblock %}

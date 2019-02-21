@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <br><br>
+      <h1 class="mt-2 text-center" style="color: #7B7171;font-family: inherit">Recent Articles</h1>
+      <hr class="mt-0 mb-0 text-center" style="width: 6%;border: 1px solid crimson;">
+      <br>
+
+
+      {% for ar in article_data %}
+      {% if ar.post__title == '' %}
+      <h6>
+        <img src="{% static '/img/blog/'%}{{ar.user__profile_picture}}" class="avatar" style="margin-right: 20px" />
+        <span style="color: rebeccapurple">{{ar.user__user_username}}</span> :
+        <span style="margin-top: 20px;color: #695f5f;">{{ar.comment_content}} </span>
+      </h6>
+      {% else %}
+      <br>
+      <br>
+
+      <h2 style="color: #5a5050;">{{ar.post__title}}</h2>
+      <h5 style="color: #5a5050;">{{ar.post__post_content}}</h5>
+      <h6>
+        <img src="{% static '/img/blog/'%}{{ar.user__profile_picture}}" class="avatar" style="margin-right: 20px" />
+        <span style="color: rebeccapurple">{{ar.user__user_username}}</span> :
+        <span style="margin-top: 20px;color: #695f5f;">{{ar.comment_content}} </span>
+      </h6>
+      {% endif %}
+
+      <!-- <hr> -->
+      <a style="margin-top: 15px;margin-bottom: 20px;" href="{{ar.post__id}}/{{ar.post__user_id}}/">Comment</a>
+
+      <!-- <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            
+           <button type="submit" >Post</button>
+           </form> -->
+
+      <br>
+      {% endfor %}
+      <br>
+      <br>
+      
+      <!-- posts without comments -->
+      {% for artcle in posts %}
+      <h3> {{artcle.title}}</h3>
+      <h5 style="color: #5a5050;">{{artcle.post_content}}</h5>
+      <a style="margin-top: 15px;margin-bottom: 20px;" href="{{artcle.id}}/1/">Comment</a>
+      <br>
+      <br>
+      
+      
+      {% endfor %}
+
+
+      <!-- Button trigger modal -->
+      <a style="float: right" href="add_post/1/" type="button" class="btn btn-success"> Add Article</a>
+      <br>
+      <br>
+      <br>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

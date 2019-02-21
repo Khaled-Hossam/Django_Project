@@ -1,0 +1,19 @@
+<html>
+   <head></head>
+
+   <body>
+      <form class="form-style-9" method="POST">
+            {% csrf_token %}
+            <h2 class="form-label">Car reservation</h2>
+            <hr>
+         <br/>
+         <br/>
+            {{form.as_p}}
+         <br/>
+            <div>
+               <input class="button_1" type="submit" value="Book">
+               <input class="button_1" type="submit" value="Reset">
+            </div>
+      </form>
+   </body>
+</html>
