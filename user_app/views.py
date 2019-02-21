@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from user_app.forms import UserForm, UserUpdateInfoForm
+from user_app.forms import *
 from user_app.models import UserProfileInfo
 
 # login imports
@@ -9,11 +9,11 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 
 def index(request):
-    return render(request, "user_app/index.html")
+    return render(request, "countries/index.html")
 
 def register(request):
     if request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('index'))
+        return HttpResponseRedirect(reverse('countries:index'))
 
     registerd = False
     if request.method == "POST":
@@ -29,6 +29,7 @@ def register(request):
 
             profile = profile_form.save(commit=False)
             profile.user = user
+            profile.user_username = user.username
 
             if 'profile_picture' in request.FILES:
                 profile.profile_picture = request.FILES['profile_picture']
@@ -51,7 +52,7 @@ def register(request):
 
 def user_login(request):
     if request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('index'))
+        return HttpResponseRedirect(reverse('countries:index'))
         
     if request.method == 'POST':
         username = request.POST.get('username').lower()
@@ -61,7 +62,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request,user)
-                return HttpResponseRedirect(reverse('index'))
+                return HttpResponseRedirect(reverse('countries:index'))
 
             else:
                 return render(request,'user_app/login.html',context={"inactive":True,})
@@ -75,13 +76,40 @@ def user_login(request):
 @login_required
 def user_logout(request):
     logout(request)
-    return HttpResponseRedirect(reverse('index'))
-
-# @login_required
-# def special(request):
-#     return HttpResponse("Logged in!")
+    return HttpResponseRedirect(reverse('countries:index'))
 
 @login_required
 def user_profile(request):
     user_info = UserProfileInfo.objects.get(user=request.user)
     return render(request,'user_app/user_profile.html',{"user":request.user,"user_info":user_info})
+# TODO: validate image
+@login_required
+def user_update_profile(request):
+    user_info = UserProfileInfo.objects.get(user=request.user)
+    if request.method =='POST':
+        form = UserProfileUpdate(request.POST, instance= request.user)
+        pic_form = UserProfileInfoUpdate(request.POST)
+        if form.is_valid():
+
+            if pic_form.is_valid:
+                if 'profile_picture' in request.FILES:
+                    updated_pic = UserProfileInfo.objects.get(pk=request.user.id)
+                    updated_pic.profile_picture = request.FILES['profile_picture']
+                    updated_pic.save()
+                # UserProfileInfo.objects.filter(pk=request.user.id).update(profile_picture = updated_pic.profile_picture )
+            else:
+                context = {"user_form":form,"user_pic":pic_form,"user_info":user_info}
+                return render(request,'user_app/user_update_profile.html',context)  
+
+            form.save()
+            return HttpResponseRedirect(reverse('user_app:user_profile'))
+
+        else:
+            context = {"user_form":form,"user_pic":pic_form,"user_info":user_info}
+            return render(request,'user_app/user_update_profile.html',context)
+
+    else:
+        pic_form = UserProfileInfoUpdate(request.POST)
+        form = UserProfileUpdate(instance = request.user)
+        context = {'user_form':form,"user_pic":pic_form,"user_info":user_info,}
+        return render(request,'user_app/user_update_profile.html',context)
