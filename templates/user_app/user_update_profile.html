@@ -1,0 +1,63 @@
+{% extends 'base.html'%}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<section class="about-banner relative">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    Profile
+                </h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="about-info-area section-gap">
+    <div class="container">
+        {% if user.is_authenticated %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 ">
+                    <div class="list-group ">
+                        <img src="{{user_info.profile_picture.url}}" alt="">
+                        <a href="{% url 'user_app:user_profile' %}" class="list-group-item list-group-item-action">Profile</a>
+                        <a href="#" class="list-group-item list-group-item-action">User Experience</a>
+                        <a href="#" class="list-group-item list-group-item-action">User Car Rental Requests</a>
+                        <a href="#" class="list-group-item list-group-item-action">User Hotel Reservations</a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4> Profile</h4>
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        {{user_form|crispy}}
+                                        <hr>
+                                        {{user_pic|crispy}}
+                                        <div class="form-group row">
+                                            <div class="offset-4 ">
+                                                <input type="submit" class="primary-btn text-uppercase btn-block" aria-pressed="true" value="Update">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
