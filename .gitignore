@@ -9,3 +9,6 @@ project-env/
 
 # ignore settings file
 django_project/settings.py
+
+**/migrations/
+**/__pycache__/
