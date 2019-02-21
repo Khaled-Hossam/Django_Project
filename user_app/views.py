@@ -15,7 +15,6 @@ def register(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('countries:index'))
 
-    registerd = False
     if request.method == "POST":
 
         user_form = UserForm(data=request.POST)
@@ -35,10 +34,8 @@ def register(request):
                 profile.profile_picture = request.FILES['profile_picture']
             
             profile.save()
+            return HttpResponseRedirect(reverse('countries:index'))
 
-            registerd = True
-        # else:
-            # raise user_form.errors
     
     else:
         user_form = UserForm()
@@ -47,7 +44,6 @@ def register(request):
     return render(request,'user_app/register.html',{
         'user_form':user_form,
         'profile_form':profile_form,
-        'registered':registerd
     })
 
 def user_login(request):
@@ -80,12 +76,21 @@ def user_logout(request):
 
 @login_required
 def user_profile(request):
-    user_info = UserProfileInfo.objects.get(user=request.user)
+    try:
+        user_info = UserProfileInfo.objects.get(user=request.user)
+    except UserProfileInfo.DoesNotExist:
+       user_info = None
+
     return render(request,'user_app/user_profile.html',{"user":request.user,"user_info":user_info})
+
 # TODO: validate image
 @login_required
 def user_update_profile(request):
-    user_info = UserProfileInfo.objects.get(user=request.user)
+    try:
+        user_info = UserProfileInfo.objects.get(user=request.user)
+    except UserProfileInfo.DoesNotExist:
+       user_info = None
+
     if request.method =='POST':
         form = UserProfileUpdate(request.POST, instance= request.user)
         pic_form = UserProfileInfoUpdate(request.POST)
