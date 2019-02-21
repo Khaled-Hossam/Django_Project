@@ -1,5 +1,4 @@
 from django.db import models
-from .models import *
 
 
 class Country(models.Model):
@@ -40,8 +39,11 @@ class Sight(models.Model):
     def __str__(self):
         return self.name
 
+# table containing all hotel names and their id
 class Hotel(models.Model):
     name = models.CharField(max_length=50)
     image = models.ImageField(upload_to='uploads/sights/', max_length=200, default=None)
     city = models.ForeignKey(City, default=None)
+    def __str__(self):
+        return self.name
     
