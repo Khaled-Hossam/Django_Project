@@ -1,7 +1,13 @@
-<html>
-   <head></head>
+{% extends 'base.html' %}
 
-   <body>
+{% block body %}
+<style>
+   input[type=submit]:hover {
+  background-color: #45a049;
+}
+</style>
+<center>
+
       <form class="form-style-9" method="POST">
             {% csrf_token %}
             <h2 class="form-label">Car reservation</h2>
@@ -15,5 +21,6 @@
                <input class="button_1" type="submit" value="Reset">
             </div>
       </form>
-   </body>
-</html>
+</center>
+
+{% endblock %}

@@ -1,19 +1,40 @@
-<html>
-   <head></head>
 
-   <body>
-      <form class="form-style-9" method="POST">
-            {% csrf_token %}
-            <h2 class="form-label">New Hotel reservation</h2>
+{% extends 'base.html' %}
+
+{% block body %}
+
+<style>
+
+    
+      input[type=submit]:hover {
+     background-color: #45a049;
+   }
+  
+
+
+</style>
+
+
+   <center>
+   
+      <form class="form-style-9" method="POST"> 
+             {% csrf_token %}
+             <h2 class="form-label">New Hotel reservation</h2> 
             <hr>
-         <br/>
-         <br/>
-            {{form.as_p}}
+         <br/> 
+            <!-- {{form.as_p}} -->
+            choose hotel : {{form.hotel_id}}
+            <!-- user_id : {{form.user_id}}  -->
+            from_date : <br> {{form.from_date}}<br>
+            to_date : <br> {{form.to_date}}<br>
+            number of adults : <br> {{form.no_of_adults}}
+            <br>
+
          <br/>
             <div>
                <input class="button_1" type="submit" value="Book">
                <input class="button_1" type="submit" value="Reset">
             </div>
-      </form>
-   </body>
-</html>
+      </form> 
+   </center>
+{% endblock %}
