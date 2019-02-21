@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<br><br>
+<div class="container">
+        <div class="row justify-content-center">
+          <div class="col-10">
+<div class="form">
+    <form method="POST">
+        <div class="form-group">
+            <label>Add Comment : </label>
+            {% csrf_token %}
+            <!-- {{ form.as_p }} -->
+            {{ form.comment_content}}
+
+            <!-- <input hi type="number" name="user" value="" /> -->
+            <!-- <input type="number" name="post" value=""/> -->
+
+            <div class="text-center mt-3">
+                <input type="submit" id='js-pl-submit' class="btn btn-danger comment-submit-button" value='Submit' />
+            </div>
+    </form>
+</div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}
