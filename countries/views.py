@@ -1,11 +1,10 @@
 from django.shortcuts import render
-# from cities_light.models import Country, City
 from .models import *
 
 def index(request):
     countries = Country.objects.all()
-    top6_countries = countries[0:6]
-    top6_cities = City.objects.all()[0:6]
+    top6_countries = Country.objects.all().order_by("-rate")[0:6]
+    top6_cities = City.objects.all().order_by("-rate")[0:6]
     context = {'countries': countries, 'top6_countries': top6_countries, 'top6_cities': top6_cities}
     return render(request, 'index.html', context)
 
@@ -22,7 +21,8 @@ def display(request, country_id):
 def display_city(request, city_id):
     city = City.objects.get(id = city_id)
     countries = Country.objects.all()
-    # sights = City.objects.filter(country_id = country_id)
-    context = {'city': city, 'countries': countries}
+    sights = Sight.objects.filter(city_id = city_id)
+    hotels = Hotel.objects.filter(city_id = city_id)
+    context = {'city': city, 'countries': countries, 'sights':sights, 'hotels': hotels}
     return render(request, 'city.html', context)
 

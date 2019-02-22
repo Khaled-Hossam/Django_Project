@@ -1,6 +1,7 @@
 from django import forms
 from .models import HotelReservationRequest
 from .models import Hotel
+from django.http import HttpResponse
 
 
 # form class
@@ -9,7 +10,7 @@ class reservationForm(forms.ModelForm):
     class Meta:
         model = HotelReservationRequest
         #user_id included in our fields
-        fields = ('hotel_id', 'from_date', 'to_date', 'no_of_adults',)
+        fields = ('hotel_id','from_date', 'to_date', 'no_of_adults',)
 
         def __init__(self, *args, **kwargs):
             super(reservationForm, self).__init__(*args, **kwargs)
