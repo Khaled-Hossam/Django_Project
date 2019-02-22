@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-<!-- {# load crispy_forms_tags #} -->
-<!-- {# crispy user_form user_form.helper #} -->
+{% load crispy_forms_tags %}
+{# crispy user_form user_form.helper #}
 
 {% block body %}
 <section class="about-banner relative">
@@ -20,9 +20,9 @@
             <!-- <div class="row align-items-center "> -->
                     <form method="POST" style="widows: 100%;" enctype="multipart/form-data" class="form-horizontal">
                         {% csrf_token %}
-                        {{user_form.as_p}}
+                        {{user_form|crispy}}
                         <hr>
-                        {{profile_form.as_p}}
+                        {{profile_form|crispy}}
                     <input type="submit" class="primary-btn text-uppercase btn-block" value="Register">
                     </form>
             <!-- </div> -->
