@@ -8,6 +8,7 @@ from .forms import *
 from user_app.models import UserProfileInfo
 from django.contrib.auth import authenticate
 from django.core.urlresolvers import reverse
+from countries.models import *
     
 
 
@@ -41,7 +42,8 @@ def show_city_articles(request,city_id):
 
     
     posts_without_comments=Post.objects.values('id','title','post_content').exclude(id__in=Comment.objects.values('post__id')).filter(city_id=city_id)
-    posts_data={'article_data':comments,'posts':posts_without_comments}
+    countries=Country.objects.all()
+    posts_data={'article_data':comments,'posts':posts_without_comments,'country':countries}
     
 #     posts_data={'article_data':comments}
     return render(request,"user_experience_app/city_page.html",posts_data)
