@@ -1,24 +1,28 @@
 {% extends 'base.html' %}
 
 {% block body %}
-			
-			  
-			<!-- start banner Area -->
-			<section class="about-banner relative">
-				<div class="overlay overlay-bg"></div>
-				<div class="container">				
-					<div class="row d-flex align-items-center justify-content-center">
-						<div class="about-content col-lg-12">
-							<h1 class="text-white">
-								{{city.name}}				
-							</h1>	
-							<p class="text-white link-nav"><a href="/">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a> City</a></p>
-						</div>
-						<div class="col-lg-4 col-md-6 banner-right">
-							<a href="/user_experience_app/city/{{city.id}}" class="primary-btn text-uppercase ">User experience</a>
-							<a href="" class="primary-btn text-uppercase ">Booking</a>
-							<br><br>
-								<!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+
+<!-- start banner Area -->
+<section class="about-banner relative">
+	<div class="overlay overlay-bg"></div>
+	<div class="container">
+		<div class="row d-flex align-items-center justify-content-center">
+			<div class="about-content col-lg-12">
+				<h1 class="text-white">
+					{{city.name}}
+				</h1>
+				<p class="text-white link-nav"><a href="/">Home </a> <span class="lnr lnr-arrow-right"></span> <a> City</a></p>
+			</div>
+			<div class="col-lg-4 col-md-6 banner-right">
+				<center><a href="/user_experience_app/city/{{city.id}}" class="primary-btn text-uppercase">User Experience</a></center>
+				<br>
+				<center>
+				<a href="/book_hotel/book/" class="primary-btn text-uppercase">Book a Hotel</a>
+				<a href="/book_car/book/" class="primary-btn text-uppercase ">Book a Car</a>
+			</center>
+				<br><br>
+				<!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
 								  <li class="nav-item">
 									<a class="nav-link active" id="flight-tab" data-toggle="tab" href="#flight" role="tab" aria-controls="flight" aria-selected="true">Flights</a>
 								  </li>
@@ -64,90 +68,92 @@
 									</form>							  	
 								  </div>
 								</div> -->
-							</div>	
-					</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End banner Area -->
+
+<!-- Start about-info Area -->
+<section class="about-info-area section-gap">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-6 info-left">
+				<img class="img-fluid" src="/media/{{city.image}}" alt="">
+			</div>
+			<div class="col-lg-6 info-right">
+				<!-- <h6>About Us</h6> -->
+				<h1>{{city.name}}</h1>
+				<p>
+					Here, I focus on a range of items and features that we use in life without giving them a second thought. such as
+					Coca Cola. Dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+					magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End about-info Area -->
+
+
+<!-- Start other-issue Area -->
+<section class="other-issue-area section-gap">
+	<div class="container">
+		<div class="row d-flex justify-content-center">
+			<div class="menu-content pb-70 col-lg-9">
+				<div class="title text-center">
+					<h1 class="mb-10">Sights</h1>
 				</div>
-			</section>
-			<!-- End banner Area -->	
-
-			<!-- Start about-info Area -->
-			<section class="about-info-area section-gap">
-				<div class="container">
-					<div class="row align-items-center">
-						<div class="col-lg-6 info-left">
-							<img class="img-fluid" src="/static/media/{{city.image}}" alt="">
-						</div>
-						<div class="col-lg-6 info-right">
-							<!-- <h6>About Us</h6> -->
-							<h1>{{city.name}}</h1>
-							<p>
-								Here, I focus on a range of items and features that we use in life without giving them a second thought. such as Coca Cola. Dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-							</p>
-						</div>
+			</div>
+		</div>
+		<div class="row">
+			{% for sight in sights %}
+			<div class="col-lg-3 col-md-6">
+				<div class="single-other-issue">
+					<div class="thumb">
+						<img class="img-fluid" src="/media/{{sight.image}}" alt="">
 					</div>
-				</div>	
-			</section>
-            <!-- End about-info Area -->
-            
+					<h4>{{sight.name}}</h4>
+					<p>
+						{{sight.description|truncatewords:30}}
+					</p>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+<!-- End other-issue Area -->
 
-            <!-- Start other-issue Area -->
-			<section class="other-issue-area section-gap">
-                    <div class="container">
-                        <div class="row d-flex justify-content-center">
-                            <div class="menu-content pb-70 col-lg-9">
-                                <div class="title text-center">
-                                    <h1 class="mb-10">Sights</h1>
-                                </div>
-                            </div>
-                        </div>					
-                        <div class="row">
-                            {% for sight in sights %}
-                            <div class="col-lg-3 col-md-6">
-                                <div class="single-other-issue">
-                                    <div class="thumb">
-                                        <img class="img-fluid" src="/static/media/{{sight.image}}" alt="">					
-                                    </div>
-                                        <h4>{{sight.name}}</h4>
-                                    <p>
-										{{sight.description|truncatewords:30}}
-                                    </p>
-                                </div>
-                            </div>
-                            {% endfor %}											
-                        </div>
-                    </div>	
-                </section>
-				<!-- End other-issue Area -->
-				
-				<!-- Start other-issue Area -->
-			<section class="other-issue-area section-gap">
-                    <div class="container">
-                        <div class="row d-flex justify-content-center">
-                            <div class="menu-content pb-70 col-lg-9">
-                                <div class="title text-center">
-                                    <h1 class="mb-10">Hotels</h1>
-                                </div>
-                            </div>
-                        </div>					
-                        <div class="row">
-                            {% for hotel in hotels %}
-                            <div class="col-lg-3 col-md-6">
-                                <div class="single-other-issue">
-                                    <div class="thumb">
-                                        <img class="img-fluid" src="/static/media/{{hotel.image}}" alt="">					
-                                    </div>
-                                        <h4>{{hotel.name}}</h4>
-                                    <p>
-										{{hotel.description|truncatewords:30}}
-                                    </p>
-                                </div>
-                            </div>
-                            {% endfor %}											
-                        </div>
-                    </div>	
-                </section>
-                <!-- End other-issue Area -->
-		    
+<!-- Start other-issue Area -->
+<section class="other-issue-area section-gap">
+	<div class="container">
+		<div class="row d-flex justify-content-center">
+			<div class="menu-content pb-70 col-lg-9">
+				<div class="title text-center">
+					<h1 class="mb-10">Hotels</h1>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			{% for hotel in hotels %}
+			<div class="col-lg-3 col-md-6">
+				<div class="single-other-issue">
+					<div class="thumb">
+						<img class="img-fluid" src="/media/{{hotel.image}}" alt="">
+					</div>
+					<h4>{{hotel.name}}</h4>
+					<p>
+						{{hotel.description|truncatewords:30}}
+					</p>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+<!-- End other-issue Area -->
 
-			
-			{% endblock %}
+
+
+{% endblock %}
