@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^countries/', include('countries.urls')), 
     # url(r'^', views.index),
-    url(r'^user_app/',include('user_app.urls')),
+    url(r'^accounts/',include('user_app.urls')),
     url(r'^user_experience_app/',include('user_experience_app.urls')),
     # url(r'^logout/$',views.user_logout,name='logout')
    
