@@ -43,7 +43,7 @@ def register(request):
         user_form = UserForm()
         profile_form = UserUpdateInfoForm()
 
-    return render(request,'user_app/register.html',{
+    return render(request,'accounts/register.html',{
         'user_form':user_form,
         'profile_form':profile_form,
         'countries':countries,
@@ -65,13 +65,13 @@ def user_login(request):
                 return HttpResponseRedirect(reverse('countries:index'))
 
             else:
-                return render(request,'user_app/login.html',context={"inactive":True,'countries':countries,})
+                return render(request,'accounts/login.html',context={"inactive":True,'countries':countries,})
 
         else:
-            return render(request,'user_app/login.html',context={"invalid":True,"username":username,'countries':countries,})
+            return render(request,'accounts/login.html',context={"invalid":True,"username":username,'countries':countries,})
 
     else:
-        return render(request,'user_app/login.html',context={'countries':countries,})
+        return render(request,'accounts/login.html',context={'countries':countries,})
 
 @login_required
 def user_logout(request):
@@ -86,7 +86,7 @@ def user_profile(request):
     except UserProfileInfo.DoesNotExist:
        user_info = None
 
-    return render(request,'user_app/user_profile.html',{"user":request.user,"user_info":user_info,'countries':countries,})
+    return render(request,'accounts/user_profile.html',{"user":request.user,"user_info":user_info,'countries':countries,})
 
 @login_required
 def user_update_profile(request):
@@ -109,17 +109,17 @@ def user_update_profile(request):
                 # UserProfileInfo.objects.filter(pk=request.user.id).update(profile_picture = updated_pic.profile_picture )
             else:
                 context = {"user_form":form,"user_pic":pic_form,"user_info":user_info,'countries':countries,}
-                return render(request,'user_app/user_update_profile.html',context)  
+                return render(request,'accounts/user_update_profile.html',context)  
 
             form.save()
             return HttpResponseRedirect(reverse('user_app:user_profile'))
 
         else:
             context = {"user_form":form,"user_pic":pic_form,"user_info":user_info,'countries':countries,}
-            return render(request,'user_app/user_update_profile.html',context)
+            return render(request,'accounts/user_update_profile.html',context)
 
     else:
         pic_form = UserProfileInfoUpdate(request.POST)
         form = UserProfileUpdate(instance = request.user)
         context = {'user_form':form,"user_pic":pic_form,"user_info":user_info,'countries':countries,}
-        return render(request,'user_app/user_update_profile.html',context)
+        return render(request,'accounts/user_update_profile.html',context)
