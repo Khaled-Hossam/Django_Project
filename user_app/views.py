@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from user_app.forms import *
 from user_app.models import UserProfileInfo
+from countries.models import Country
 
 # login imports
 from django.core.urlresolvers import reverse
@@ -8,10 +9,11 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 
-def index(request):
-    return render(request, "countries/index.html")
+# def index(request):
+#     return render(request, "countries/index.html")
 
 def register(request):
+    countries = Country.objects.all()
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('countries:index'))
 
@@ -44,9 +46,11 @@ def register(request):
     return render(request,'user_app/register.html',{
         'user_form':user_form,
         'profile_form':profile_form,
+        'countries':countries,
     })
 
 def user_login(request):
+    countries = Country.objects.all()
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('countries:index'))
         
@@ -61,13 +65,13 @@ def user_login(request):
                 return HttpResponseRedirect(reverse('countries:index'))
 
             else:
-                return render(request,'user_app/login.html',context={"inactive":True,})
+                return render(request,'user_app/login.html',context={"inactive":True,'countries':countries,})
 
         else:
-            return render(request,'user_app/login.html',context={"invalid":True,"username":username,})
+            return render(request,'user_app/login.html',context={"invalid":True,"username":username,'countries':countries,})
 
     else:
-        return render(request,'user_app/login.html')
+        return render(request,'user_app/login.html',context={'countries':countries,})
 
 @login_required
 def user_logout(request):
@@ -76,16 +80,17 @@ def user_logout(request):
 
 @login_required
 def user_profile(request):
+    countries = Country.objects.all()
     try:
         user_info = UserProfileInfo.objects.get(user=request.user)
     except UserProfileInfo.DoesNotExist:
        user_info = None
 
-    return render(request,'user_app/user_profile.html',{"user":request.user,"user_info":user_info})
+    return render(request,'user_app/user_profile.html',{"user":request.user,"user_info":user_info,'countries':countries,})
 
-# TODO: validate image
 @login_required
 def user_update_profile(request):
+    countries = Country.objects.all()
     try:
         user_info = UserProfileInfo.objects.get(user=request.user)
     except UserProfileInfo.DoesNotExist:
@@ -103,18 +108,18 @@ def user_update_profile(request):
                     updated_pic.save()
                 # UserProfileInfo.objects.filter(pk=request.user.id).update(profile_picture = updated_pic.profile_picture )
             else:
-                context = {"user_form":form,"user_pic":pic_form,"user_info":user_info}
+                context = {"user_form":form,"user_pic":pic_form,"user_info":user_info,'countries':countries,}
                 return render(request,'user_app/user_update_profile.html',context)  
 
             form.save()
             return HttpResponseRedirect(reverse('user_app:user_profile'))
 
         else:
-            context = {"user_form":form,"user_pic":pic_form,"user_info":user_info}
+            context = {"user_form":form,"user_pic":pic_form,"user_info":user_info,'countries':countries,}
             return render(request,'user_app/user_update_profile.html',context)
 
     else:
         pic_form = UserProfileInfoUpdate(request.POST)
         form = UserProfileUpdate(instance = request.user)
-        context = {'user_form':form,"user_pic":pic_form,"user_info":user_info,}
+        context = {'user_form':form,"user_pic":pic_form,"user_info":user_info,'countries':countries,}
         return render(request,'user_app/user_update_profile.html',context)
