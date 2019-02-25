@@ -10,7 +10,7 @@ from countries.models import Hotel
 # table linking user to hotels
 class HotelReservationRequest(models.Model):
     hotel_id = models.ForeignKey(Hotel)
-    user_id = models.ForeignKey(User)
+    user = models.ForeignKey(User)
     from_date = models.DateField()
     to_date = models.DateField()
     no_of_adults = models.IntegerField()

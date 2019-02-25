@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import reservationForm
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse # added by Mahydit to authenticate
 # Create your views here.
 
 
-def reservation(request):
+def reservation(request, city_id):
         if request.user.is_authenticated: # added by Mahydit to authenticate
                 form = reservationForm()
                 if request.method == "POST":
@@ -16,9 +16,10 @@ def reservation(request):
                         if form.is_valid():
                                 obj=form.save(commit=False)
                         # obj.Hotel=Hotel.objects.get(id=hotel_id)
-                                obj.user=UserProfileInfo.objects.get(id=1)
+                                obj.user= request.user
                                 obj.save()
-                                return HttpResponse("<div class='alert alert-success '>Booking Done </div>")
+                                # return HttpResponse("<div class='alert alert-success '>Booking Done </div>")
+                                return redirect('/countries/cities/'+ city_id)
                 return render(request, 'hotel.html', {'form':form})
 
 

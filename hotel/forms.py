@@ -1,7 +1,7 @@
 from django import forms
 from .models import HotelReservationRequest
-from .models import Hotel
-from django.http import HttpResponse
+from countries.models import Hotel
+
 
 
 # form class
@@ -14,5 +14,5 @@ class reservationForm(forms.ModelForm):
 
         def __init__(self, *args, **kwargs):
             super(reservationForm, self).__init__(*args, **kwargs)
-            self.fields['hotel_id'].queryset = Hotel.objects.filter(city_id = '1')
+            self.fields['hotel_id'].queryset = Hotel.objects.filter(city_id = 1)
 	    ## number 1 in last line is merely a test.
