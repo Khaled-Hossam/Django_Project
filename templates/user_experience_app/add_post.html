@@ -7,9 +7,7 @@
     <div class="container">
         <div class="row d-flex align-items-center justify-content-center">
             <div class="about-content col-lg-12">
-               
                   <h1 class="mt-2 text-center text-white" style="color: #7B7171;font-family: inherit">Recent Articles</h1>
-                
             </div>
         </div>
     </div>
@@ -23,16 +21,13 @@
             <div class="form">
                 <form method="POST">
                     <div class="form-group">
-
                         {% csrf_token %}
-                        <!-- {{ form.as_p }} -->
                         <label> Article Title : </label>
                         {{ form.title}}
                         <br>
                         <br>
                         <label> Article content : </label>
                         {{ form.post_content}}
-
                         <div class="text-center mt-3">
                             <input type="submit" id='js-pl-submit' class="btn btn-danger comment-submit-button"
                                 value='Submit' />
