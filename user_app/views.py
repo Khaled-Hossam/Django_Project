@@ -36,7 +36,7 @@ def register(request):
                 profile.profile_picture = request.FILES['profile_picture']
             
             profile.save()
-            return HttpResponseRedirect(reverse('countries:index'))
+            return HttpResponseRedirect(reverse('user_app:user_login'))
 
     
     else:
