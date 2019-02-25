@@ -16,6 +16,6 @@ Including another URLconf
 from django.conf.urls import url, include
 from . import views
 urlpatterns = [
-        url(r'book', views.reservation), ### user came to book a car 
+        url(r'book/(?P<city_id>[0-9]+)$', views.reservation), ### user came to book a car 
 
 ]

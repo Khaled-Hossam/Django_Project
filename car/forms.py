@@ -11,11 +11,11 @@ class reservationForm(forms.ModelForm):
         #user_id included in our fields
         #,'pick_up_point','destination'
         #fields = ('car_requested',)
-        fields = ('car_requested','pick_up_date','Drop_off_date','pick_up_time','Drop_off_time')
+        fields = ('pick_up_point', 'destination' ,'pick_up_date','Drop_off_date','pick_up_time','Drop_off_time')
 
         def __init__(self, *args, **kwargs):
             super(reservationForm, self).__init__(*args, **kwargs)
-            self.fields['car_requested'].queryset = Car.objects.filter(city_id = '1')
-            #self.fields['destination'].queryset = Location.objects.filter(location_city_id=location_id_url)
-            #self.fields['pick_up_point'].queryset = Location.objects.filter(location_city_id=location_id_url)
+           # self.fields['car_requested'].queryset = Car.objects.filter(city_id = '1')
+            #self.fields['destination'].queryset = Sight.objects.filter()
+            #self.fields['pick_up_point'].queryset = Sight.objects.filter()
 	    ## number 1 in last line is merely a test.

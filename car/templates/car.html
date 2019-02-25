@@ -18,6 +18,15 @@
        </div>
    </div>
 </section>
+<style>
+. form-style-9{
+border: 1px dotted #999;
+border-radius: 0;
+
+-webkit-appearance: none;
+}
+
+</style>
 <center>
 
       <form class="form-style-9" method="POST">
@@ -25,7 +34,14 @@
            
          <br/>
          <br/>
-            {{form.as_p}}
+         from(location): {{form.destination}}
+         <!-- user_id : {{form.user_id}}  -->
+         to (location): <br> {{form.destination}}<br>
+         date (from) : <br> {{ form.pick_up_date }}<br>
+         date  (to): <br> {{form.Drop_off_date}}<br>
+         time (from): <br> {{form.pick_up_time}}<br>
+         time (to): <br> {{form.Drop_off_time}}<br>
+         <br>
          <br/>
             <div>
                <input class="button_1" type="submit" value="Book">

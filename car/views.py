@@ -9,16 +9,18 @@ from django.core.urlresolvers import reverse # added by Mahydit to authenticate
 # Create your views here.
 
 
-def reservation(request):
+def reservation(request, city_id):
         if request.user.is_authenticated: # added by Mahydit to authenticate
                 form = reservationForm()
                 if request.method == "POST":
                         form = reservationForm(request.POST)
                         if form.is_valid():
                                 obj=form.save(commit=False)
-                                obj.user=UserProfileInfo.objects.get(id=1)
+                                
+                                obj.user= request.user
                                 obj.save()
-                                return HttpResponse("<div class='alert alert-success '>Booking Done </div>")
+                              #  return HttpResponse("<div class='alert alert-success '>Booking Done </div>")
+                                return redirect('/countries/cities/'+ city_id)
                 return render(request, 'car.html', {'form':form})
 
                 #form = form.save(commit=False)
