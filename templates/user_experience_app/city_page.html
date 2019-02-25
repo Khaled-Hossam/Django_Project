@@ -24,7 +24,11 @@
       {% for ar in article_data %}
       {% if ar.post__title == '' %}
       <h6>
-        <img src="{% static '/img/blog/'%}{{ar.user__profile_picture}}" class="avatar" style="margin-right: 20px" />
+          {% if ar.user__profile_picture %}
+        <img src="/media/{{ar.user__profile_picture}}" class="avatar" style="margin-right: 20px" />
+        {% else %}
+        <img src="{% static '/img/blog/avatar1.png' %}" class="avatar" style="margin-right: 20px">
+        {% endif %}
         <span style="color: rebeccapurple">{{ar.user__user_username}}</span> :
         <span style="margin-top: 20px;color: #695f5f;">{{ar.comment_content}} </span>
       </h6>
@@ -35,14 +39,20 @@
       <h2 style="color: #5a5050;">{{ar.post__title}}</h2>
       <h5 style="color: #5a5050;">{{ar.post__post_content}}</h5>
       <h6>
-        <img src="{% static '/img/blog/'%}{{ar.user__profile_picture}}" class="avatar" style="margin-right: 20px" />
+          {% if ar.user__profile_picture %}
+          <img src="/media/{{ar.user__profile_picture}}" class="avatar" style="margin-right: 20px" />
+          {% else %}
+          <img src="{% static '/img/blog/avatar1.png' %}" class="avatar" style="margin-right: 20px" >
+          {% endif %}
         <span style="color: rebeccapurple">{{ar.user__user_username}}</span> :
         <span style="margin-top: 20px;color: #695f5f;">{{ar.comment_content}} </span>
       </h6>
       {% endif %}
 
       <!-- <hr> -->
+      {% if user.is_authenticated %}
       <a style="margin-top: 15px;margin-bottom: 20px;" href="{{ar.post__id}}/{{ar.post__user_id}}/">Comment</a>
+      {% endif %}
 
       <!-- <form method="POST">
             {% csrf_token %}
@@ -60,7 +70,9 @@
       {% for artcle in posts %}
       <h3> {{artcle.title}}</h3>
       <h5 style="color: #5a5050;">{{artcle.post_content}}</h5>
+      {% if user.is_authenticated %}
       <a style="margin-top: 15px;margin-bottom: 20px;" href="{{artcle.id}}/1/">Comment</a>
+      {% endif %}      
       <br>
       <br>
       
@@ -69,7 +81,9 @@
 
 
       <!-- Button trigger modal -->
+      {% if user.is_authenticated %}
       <a style="float: right" href="add_post/1/" type="button" class="btn btn-success"> Add Article</a>
+      {% endif %}
       <br>
       <br>
       <br>
